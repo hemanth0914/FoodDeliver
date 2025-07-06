@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import HeaderComponent from './components/HeaderComponent'
 import BodyComponent from './components/BodyComponent'
@@ -8,6 +8,7 @@ import Contact from "./components/Contact"
 import Error from "./components/Error"
 import RestaurantMenu from "./components/RestaurantMenu"
 import { lazy, Suspense } from "react";
+import UserContext from "./utils/UserContext";
 // const FooterComponent = () => (
 //     <div className="footer">
 //         <h1>Footer</h1>
@@ -16,12 +17,24 @@ import { lazy, Suspense } from "react";
 
 const Grocery = lazy(()=> import("./components/Grocery"))
 
-const AppLayoutComponent = () => (
-    <div className="app">
-        <HeaderComponent />
-        <Outlet />
-    </div>
-)
+
+const AppLayoutComponent = () => {
+        const [loggedInUser, setLoggedInUser] = useState()   // this is a state variable
+        useEffect(()=>{
+            const data = {
+                useremail: "srisaihemanth@gmail.com"
+            }
+            setLoggedInUser(data.useremail)
+        }, [])
+    return (
+    <UserContext.Provider value={{useremail: loggedInUser}}>
+        <div className="app">
+            <HeaderComponent />
+            <Outlet />
+        </div>
+    </UserContext.Provider>
+    )
+    }
 
 const appRouter = createBrowserRouter([
     {
