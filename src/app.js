@@ -9,6 +9,9 @@ import Error from "./components/Error"
 import RestaurantMenu from "./components/RestaurantMenu"
 import { lazy, Suspense } from "react";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 // const FooterComponent = () => (
 //     <div className="footer">
 //         <h1>Footer</h1>
@@ -27,12 +30,14 @@ const AppLayoutComponent = () => {
             setLoggedInUser(data.useremail)
         }, [])
     return (
-    <UserContext.Provider value={{useremail: loggedInUser}}>
-        <div className="app">
-            <HeaderComponent />
-            <Outlet />
-        </div>
-    </UserContext.Provider>
+        <Provider store={appStore}>
+        <UserContext.Provider value={{useremail: loggedInUser}}>
+            <div className="app">
+                <HeaderComponent />
+                <Outlet />
+            </div>
+        </UserContext.Provider>
+        </Provider>
     )
     }
 
@@ -60,6 +65,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/grocery",
                 element: <Suspense fallback={<h1>Loading...</h1>}><Grocery /></Suspense>
+            },
+            {
+                path: "/cart",
+                element: <Cart />
             }
         ],
         errorElement: <Error />

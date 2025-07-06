@@ -15,9 +15,8 @@ const RestaurantMenu = () => {
     const toggleCategory = (index) => {
         setExpandedMap((prev) => (
             {...prev, [index]: !prev[index]}
-        ) ) 
+        )) 
     }
-
 	useEffect(() => {
 		if (resInfo) {
 			const allCards =
@@ -35,16 +34,16 @@ const RestaurantMenu = () => {
 	if (resInfo === null || resInfo === undefined) return <Shimmer />;
 
 	return (
-		<div className="flex flex-col items-center">
+		<div className="flex flex-col">
 			{categories.map((category, index) => {
 				return (
 					<div
 						key={category.card.card.title}
-						className="p-2 m-2 border-b-2 border-gray-200 w-3/4 items-center"
+						className="p-2 m-2 border-b-2 border-gray-200"
 					>
 						<div onClick={() => (
                             toggleCategory(index)
-                        )} className="text-lg font-bold p-10 shadow-lg bg-gray-100 flex justify-between">
+                        )} className="flex text-lg font-bold p-10 shadow-lg bg-gray-100 w-full">
                             <h2>{category.card.card.title} </h2>
                             {expandedMap[index] ? "▼" : "▲"}
                         </div>
@@ -56,22 +55,6 @@ const RestaurantMenu = () => {
 			})}
 		</div>
 	);
-
-	// return (
-	//     <div className="menu">
-	//         <h1>{resInfo.cards[0].card.card.text}</h1>
-	//         <h2>{resInfo.cards[2].card.card.info.avgRatingString} ratings</h2>
-	//         <h2>Menu</h2>
-	//         <ul>
-	//             {
-	//                 menuItems.map((item) => {
-	//                     return <li key={item.card.info.id}>{item.card.info.name}</li>
-	//                 })
-	//             }
-	//         </ul>
-
-	//     </div>
-	// )
 };
 
 export default RestaurantMenu;

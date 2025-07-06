@@ -31,9 +31,8 @@ class UserClass extends React.Component {
         return (
             <div className="flex flex-col w-200 bg-gray-50 p-4 rounded-md shadow-md">
                 <h1> User</h1>
-                <h2>name:{name}</h2>
-                <h2>Company: {company}</h2>
-                <h2>Avatar: {avatar_url}</h2>
+                <h2>name: Hemanth</h2>
+                <h2>Company: FAANG</h2>
             </div>
         ) 
     }   
